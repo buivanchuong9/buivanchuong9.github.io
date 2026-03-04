@@ -1,0 +1,2 @@
+OWNERDOMAIN=https://buivanchuong9.github.io
+google.com, pub-4587554780506701, DIRECT, f08c47fec0942fa0
