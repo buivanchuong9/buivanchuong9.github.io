@@ -4,137 +4,413 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>MX Player - Video & Music Player</title>
+    <title>MX Player — Video & Music Player</title>
 
     <meta
         name="description"
-        content="MX Player is a local video and music player for iPhone. Play your own media files offline and in the background."
+        content="MX Player is a private video and music player for iPhone. Play your own media files offline with background audio."
     >
+
+    <meta name="theme-color" content="#0b0b0f">
 
     <style>
         * {
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             margin: 0;
+            font-family:
+                -apple-system,
+                BlinkMacSystemFont,
+                "SF Pro Display",
+                "SF Pro Text",
+                Helvetica,
+                Arial,
+                sans-serif;
+
+            background:
+                radial-gradient(
+                    circle at 50% -20%,
+                    rgba(255,255,255,0.10),
+                    transparent 45%
+                ),
+                #0b0b0f;
+
+            color: #f5f5f7;
             min-height: 100vh;
+        }
+
+        .page {
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        /* NAVIGATION */
+
+        nav {
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            max-width: 1100px;
+            margin: auto;
+            padding: 0 28px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+
+            font-size: 17px;
+            font-weight: 600;
+            letter-spacing: -0.3px;
+        }
+
+        .brand-icon {
+            width: 34px;
+            height: 34px;
+
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 24px;
-            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
-                         "SF Pro Text", Helvetica, Arial, sans-serif;
-            background: #f5f5f7;
-            color: #1d1d1f;
+
+            border-radius: 10px;
+
+            background: #ffffff;
+            color: #0b0b0f;
+
+            font-size: 14px;
+            font-weight: 800;
+            letter-spacing: -1px;
         }
 
-        .container {
-            width: 100%;
-            max-width: 720px;
+        .nav-label {
+            color: #a1a1a6;
+            font-size: 14px;
+        }
+
+        /* HERO */
+
+        .hero {
+            max-width: 900px;
+            margin: 0 auto;
+
+            padding: 105px 24px 90px;
+
             text-align: center;
         }
 
-        .logo {
-            width: 76px;
-            height: 76px;
-            margin: 0 auto 28px;
-            border-radius: 20px;
-            display: flex;
+        .eyebrow {
+            display: inline-flex;
             align-items: center;
-            justify-content: center;
-            background: #1d1d1f;
-            color: white;
-            font-size: 30px;
-            font-weight: 700;
-            letter-spacing: -1px;
+
+            padding: 7px 13px;
+
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 999px;
+
+            background: rgba(255,255,255,0.04);
+
+            color: #a1a1a6;
+            font-size: 13px;
+            font-weight: 500;
+
+            margin-bottom: 25px;
         }
 
         h1 {
             margin: 0;
-            font-size: clamp(36px, 7vw, 56px);
-            line-height: 1.05;
-            letter-spacing: -2px;
+
+            font-size: clamp(52px, 9vw, 92px);
+            line-height: 0.98;
+
+            letter-spacing: -5px;
+            font-weight: 700;
         }
 
-        .subtitle {
-            margin: 14px 0 0;
-            font-size: 21px;
-            line-height: 1.4;
-            color: #6e6e73;
+        .gradient-text {
+            background:
+                linear-gradient(
+                    135deg,
+                    #ffffff 0%,
+                    #d7d7dc 50%,
+                    #8e8e93 100%
+                );
+
+            -webkit-background-clip: text;
+            background-clip: text;
+
+            color: transparent;
         }
 
-        .description {
-            max-width: 560px;
+        .tagline {
+            max-width: 650px;
+
             margin: 28px auto 0;
-            font-size: 17px;
-            line-height: 1.6;
-            color: #6e6e73;
+
+            color: #a1a1a6;
+
+            font-size: clamp(19px, 3vw, 24px);
+            line-height: 1.45;
+
+            letter-spacing: -0.4px;
         }
 
-        .features {
+        .hero-actions {
+            margin-top: 38px;
+
             display: flex;
             justify-content: center;
+            gap: 12px;
+
             flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 30px;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            min-width: 145px;
+
+            padding: 12px 20px;
+
+            border-radius: 999px;
+
+            text-decoration: none;
+
+            font-size: 14px;
+            font-weight: 600;
+
+            transition:
+                transform 0.2s ease,
+                opacity 0.2s ease;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
+
+        .button-primary {
+            background: #ffffff;
+            color: #0b0b0f;
+        }
+
+        .button-secondary {
+            border: 1px solid rgba(255,255,255,0.14);
+            background: rgba(255,255,255,0.04);
+            color: #f5f5f7;
+        }
+
+        /* FEATURE GRID */
+
+        .features {
+            max-width: 1000px;
+            margin: 0 auto;
+
+            padding: 0 24px 100px;
+        }
+
+        .section-title {
+            text-align: center;
+
+            margin-bottom: 28px;
+
+            color: #f5f5f7;
+
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .feature-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 12px;
         }
 
         .feature {
-            padding: 9px 15px;
-            border-radius: 999px;
-            background: white;
-            border: 1px solid #e5e5e7;
-            font-size: 14px;
-            color: #424245;
+            min-height: 180px;
+
+            padding: 25px;
+
+            border-radius: 20px;
+
+            border: 1px solid rgba(255,255,255,0.08);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.055),
+                    rgba(255,255,255,0.025)
+                );
+
+            transition:
+                transform 0.2s ease,
+                border-color 0.2s ease;
         }
 
-        .footer {
-            margin-top: 48px;
-            padding-top: 24px;
-            border-top: 1px solid #d2d2d7;
-            font-size: 14px;
-            color: #86868b;
+        .feature:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255,255,255,0.16);
         }
 
-        .footer a {
-            color: #424245;
-            text-decoration: none;
+        .feature-icon {
+            width: 38px;
+            height: 38px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 11px;
+
+            background: rgba(255,255,255,0.08);
+
+            font-size: 17px;
+
+            margin-bottom: 25px;
         }
 
-        .footer a:hover {
-            text-decoration: underline;
+        .feature h3 {
+            margin: 0 0 8px;
+
+            font-size: 16px;
+            font-weight: 600;
+
+            letter-spacing: -0.2px;
         }
 
-        @media (prefers-color-scheme: dark) {
-            body {
-                background: #000;
-                color: #f5f5f7;
+        .feature p {
+            margin: 0;
+
+            color: #8e8e93;
+
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        /* ABOUT */
+
+        .about {
+            max-width: 760px;
+
+            margin: 0 auto;
+
+            padding: 10px 24px 100px;
+
+            text-align: center;
+        }
+
+        .about h2 {
+            margin: 0;
+
+            font-size: clamp(30px, 5vw, 44px);
+            letter-spacing: -2px;
+        }
+
+        .about p {
+            margin: 20px auto 0;
+
+            max-width: 620px;
+
+            color: #8e8e93;
+
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        /* FOOTER */
+
+        footer {
+            border-top: 1px solid rgba(255,255,255,0.08);
+
+            padding: 30px 24px;
+
+            color: #636366;
+
+            font-size: 12px;
+        }
+
+        .footer-inner {
+            max-width: 1000px;
+            margin: auto;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            gap: 20px;
+        }
+
+        .footer-brand {
+            color: #8e8e93;
+            font-weight: 600;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 760px) {
+
+            nav {
+                padding: 0 20px;
             }
 
-            .logo {
-                background: #f5f5f7;
-                color: #000;
+            .nav-label {
+                display: none;
             }
 
-            .subtitle,
-            .description {
-                color: #a1a1a6;
+            .hero {
+                padding-top: 75px;
+                padding-bottom: 70px;
+            }
+
+            h1 {
+                letter-spacing: -3px;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr 1fr;
             }
 
             .feature {
-                background: #1c1c1e;
-                border-color: #38383a;
-                color: #d1d1d6;
+                min-height: 165px;
+                padding: 20px;
             }
 
-            .footer {
-                border-color: #38383a;
-                color: #8e8e93;
+            .footer-inner {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            .feature-grid {
+                grid-template-columns: 1fr;
             }
 
-            .footer a {
-                color: #d1d1d6;
+            .feature {
+                min-height: auto;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .button {
+                width: 100%;
             }
         }
     </style>
@@ -142,40 +418,202 @@
 
 <body>
 
-    <main class="container">
+<div class="page">
 
-        <div class="logo">MX</div>
+    <!-- NAVIGATION -->
 
-        <h1>MX Player</h1>
+    <nav>
 
-        <p class="subtitle">
-            Video &amp; Music Player for iPhone
-        </p>
+        <div class="brand">
 
-        <p class="description">
-            Play your own video and music files offline, with support for
-            background audio and a simple, private playback experience.
-        </p>
+            <div class="brand-icon">
+                MX
+            </div>
 
-        <div class="features">
-            <span class="feature">Offline Playback</span>
-            <span class="feature">Video &amp; Music</span>
-            <span class="feature">Background Audio</span>
-            <span class="feature">Private &amp; Local</span>
+            <span>MX Player</span>
+
         </div>
 
-        <footer class="footer">
-            <p>
-                MX Player is developed for iPhone.
+        <div class="nav-label">
+            Video &amp; Music Player for iPhone
+        </div>
+
+    </nav>
+
+
+    <!-- HERO -->
+
+    <main>
+
+        <section class="hero">
+
+            <div class="eyebrow">
+                Designed for iPhone
+            </div>
+
+            <h1>
+                <span class="gradient-text">
+                    Your media.
+                </span>
+                <br>
+                Your way.
+            </h1>
+
+            <p class="tagline">
+                A simple and private video &amp; music player
+                for playing your own media files offline.
             </p>
 
+            <div class="hero-actions">
+
+                <a
+                    class="button button-primary"
+                    href="https://apps.apple.com/us/app/mx-player-video-music/id6803770465?l=vi"
+                    target="_blank"
+                    rel="noopener"
+                >
+                    View on App Store
+                </a>
+
+                <a
+                    class="button button-secondary"
+                    href="#features"
+                >
+                    Explore features
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- FEATURES -->
+
+        <section
+            class="features"
+            id="features"
+        >
+
+            <div class="section-title">
+                Built around your media
+            </div>
+
+            <div class="feature-grid">
+
+                <article class="feature">
+
+                    <div class="feature-icon">
+                        ▶
+                    </div>
+
+                    <h3>
+                        Video Playback
+                    </h3>
+
+                    <p>
+                        Play your personal video files
+                        with a clean and focused player.
+                    </p>
+
+                </article>
+
+
+                <article class="feature">
+
+                    <div class="feature-icon">
+                        ♪
+                    </div>
+
+                    <h3>
+                        Music
+                    </h3>
+
+                    <p>
+                        Listen to your own audio files
+                        wherever you go.
+                    </p>
+
+                </article>
+
+
+                <article class="feature">
+
+                    <div class="feature-icon">
+                        ↗
+                    </div>
+
+                    <h3>
+                        Background Audio
+                    </h3>
+
+                    <p>
+                        Continue listening while using
+                        other apps or with the screen locked.
+                    </p>
+
+                </article>
+
+
+                <article class="feature">
+
+                    <div class="feature-icon">
+                        ◉
+                    </div>
+
+                    <h3>
+                        Private &amp; Local
+                    </h3>
+
+                    <p>
+                        Your media stays on your device.
+                        No account is required.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- ABOUT -->
+
+        <section class="about">
+
+            <h2>
+                Made for simple playback.
+            </h2>
+
             <p>
-                For support, please contact the developer
-                through the App Store.
+                MX Player focuses on the essentials:
+                importing your own media, playing it smoothly,
+                and giving you control over how you listen and watch.
             </p>
-        </footer>
+
+        </section>
 
     </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div class="footer-inner">
+
+            <div class="footer-brand">
+                MX Player
+            </div>
+
+            <div>
+                © 2026 MX Player. All rights reserved.
+            </div>
+
+        </div>
+
+    </footer>
+
+</div>
 
 </body>
 </html>
